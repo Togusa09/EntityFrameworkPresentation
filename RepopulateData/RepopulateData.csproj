@@ -64,8 +64,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CustomerNames.txt" />
-    <Content Include="ProductNames.txt" />
+    <Content Include="CustomerNames.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProductNames.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

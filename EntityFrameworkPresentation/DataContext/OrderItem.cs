@@ -1,10 +1,13 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace EntityFrameworkPresentation.DataContext
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
     public partial class OrderItem
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public int OrderId { get; set; }

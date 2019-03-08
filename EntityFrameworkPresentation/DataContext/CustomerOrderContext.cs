@@ -1,18 +1,12 @@
-using System;
-using System.Data.Entity;
-
 namespace EntityFrameworkPresentation.DataContext
 {
+    using System.Data.Entity;
+
     public partial class CustomerOrderContext : DbContext
     {
         public CustomerOrderContext()
-            : base("name=CustomerOrders")
+            : base("name=CustomerOrderContext")
         {
-            Database.Log = s =>
-            {
-                Console.WriteLine(s);
-                System.Diagnostics.Debug.WriteLine(s);
-            };
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
@@ -28,7 +22,7 @@ namespace EntityFrameworkPresentation.DataContext
 
             modelBuilder.Entity<Customer>()
                 .Property(e => e.Balance)
-                .HasPrecision(6, 4);
+                .HasPrecision(12, 4);
 
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Orders)
@@ -37,11 +31,11 @@ namespace EntityFrameworkPresentation.DataContext
 
             modelBuilder.Entity<OrderItem>()
                 .Property(e => e.ItemPrice)
-                .HasPrecision(6, 4);
+                .HasPrecision(12, 4);
 
             modelBuilder.Entity<OrderItem>()
                 .Property(e => e.LinePrice)
-                .HasPrecision(6, 4);
+                .HasPrecision(12, 4);
 
             modelBuilder.Entity<Order>()
                 .HasMany(e => e.OrderItems)
@@ -58,7 +52,7 @@ namespace EntityFrameworkPresentation.DataContext
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.Price)
-                .HasPrecision(6, 4);
+                .HasPrecision(12, 4);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.OrderItems)

@@ -1,8 +1,11 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace EntityFrameworkPresentation.DataContext
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
     public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -11,7 +14,6 @@ namespace EntityFrameworkPresentation.DataContext
             OrderItems = new HashSet<OrderItem>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public int CustomerId { get; set; }
