@@ -16,15 +16,17 @@ namespace EntityFrameworkPresentation.DataContext
 
         public int Id { get; set; }
 
+        [Required]
         [StringLength(30)]
         public string Description { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string ImageLocation { get; set; }
 
         public byte[] LargeUncessesaryDataField { get; set; }
 
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }

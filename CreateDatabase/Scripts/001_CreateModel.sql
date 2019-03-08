@@ -2,7 +2,7 @@
 (
 	Id int not null IDENTITY (1,1) PRIMARY KEY,
 	[Name] varchar(100) not null,
-	Balance decimal(6,4)
+	Balance decimal(12,4)
 );
 
 create table Orders
@@ -14,10 +14,10 @@ create table Orders
 create table Products
 (
 	Id int not null IDENTITY (1,1) PRIMARY KEY,
-	[Description] varchar(30),
-	ImageLocation varchar(100),
+	[Description] varchar(30) not null,
+	ImageLocation varchar(100) not null,
 	LargeUncessesaryDataField varBinary(MAX),
-	Price decimal(6,4)
+	Price decimal(12,4) not null
 );
 
 create table OrderItems
@@ -26,6 +26,6 @@ create table OrderItems
 	OrderId int not null FOREIGN KEY REFERENCES Orders(Id),
 	ProductId int not null FOREIGN KEY REFERENCES Products(Id),
 	Quantity int not null,
-	ItemPrice decimal(6,4) not null,
-	LinePrice decimal(6,4) not null
+	ItemPrice decimal(12,4) not null,
+	LinePrice decimal(12,4) not null
 );

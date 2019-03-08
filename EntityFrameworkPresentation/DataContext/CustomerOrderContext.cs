@@ -1,12 +1,21 @@
 namespace EntityFrameworkPresentation.DataContext
 {
+    using System;
     using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     public partial class CustomerOrderContext : DbContext
     {
         public CustomerOrderContext()
             : base("name=CustomerOrderContext")
         {
+            Database.SetInitializer<CustomerOrderContext>(null);
+            Database.Log = s =>
+            {
+                Console.WriteLine(s);
+                System.Diagnostics.Debug.WriteLine(s);
+            };
         }
 
         public virtual DbSet<Customer> Customers { get; set; }

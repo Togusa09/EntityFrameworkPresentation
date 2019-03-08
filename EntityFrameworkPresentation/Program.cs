@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using EntityFrameworkPresentation.DataContext;
@@ -21,7 +22,7 @@ namespace EntityFrameworkPresentation
         public static void Query1(CustomerOrderContext db)
         {
             // Queries database
-            var orders = db.Orders.ToList();
+            var orders = db.Orders.Take(10).ToList();
 
             foreach (var order in orders)
             {
@@ -37,6 +38,21 @@ namespace EntityFrameworkPresentation
                     Console.Write($"Product: {description}", quantity);
                 }
             }
+        }
+
+        public static void AddData1(CustomerOrderContext db)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                // EF detects each of these as a discrete change, and processes in the insert statements one at a time
+                db.Customers.Add(new Customer
+                {
+                    Name = $"Customer {i}",
+                    Balance =  i
+                });
+            }
+
+            db.SaveChanges();
         }
     }
 
@@ -65,6 +81,24 @@ namespace EntityFrameworkPresentation
                     Console.Write($"Product: {description}", quantity);
                 }
             }
+        }
+
+        public static void AddData1(CustomerOrderContext db)
+        {
+            var customers = new List<Customer>();
+            for (int i = 0; i < 100; i++)
+            {
+                // EF detects each of these as a discrete change, and processes in the insert statements one at a time
+                customers.Add(new Customer
+                {
+                    Name = $"Customer {i}",
+                    Balance = i
+                });
+            }
+
+            // When you use AddRange, all the inserts are done as part of the one operation, dramatically reducing the overhead
+            db.Customers.AddRange(customers);
+            db.SaveChanges();
         }
     }
 
@@ -128,6 +162,17 @@ namespace EntityFrameworkPresentation
                     Console.Write($"Product: {description}", quantity);
                 }
             }
+        }
+    }
+
+    public class AdditionaNotes
+    {
+        public static void Query1(CustomerOrderContext db)
+        {
+            // Database indexes are also useful. Table records are stored in the order of their clustered index, which by default is created
+            // on the primary key, by can be set to another column if needed. ie date.
+            // Indexes provide a quick lookup of information by a key value, which avoids the need for a full table scan (table scan is bad)
+            // Indexes can also 
         }
     }
 }
