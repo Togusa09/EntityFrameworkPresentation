@@ -23,7 +23,7 @@ namespace RepopulateData
                     db.Customers.Add(new Customer()
                     {
                         Name = customerName,
-                        Balance =  (decimal)(Math.Round(random.NextDouble() * 1000, 2))
+                        Balance = (decimal)(Math.Round(random.NextDouble() * 1000, 2))
                     });
                 }
 
@@ -56,11 +56,10 @@ namespace RepopulateData
                     var customerId = customers[random.Next(customers.Length)];
 
                     var order = new Order {CustomerId = customerId};
-                    var orderLines = random.Next(10);
+                    var orderLines = random.Next(1, 10);
 
                     Console.WriteLine($"Creating order {orderNo} for customer {customerId} with {orderLines} items");
 
-                    
                     for (var lineNo = 0; lineNo < orderLines; lineNo++)
                     {
                         var productId = products[random.Next(products.Length)];
@@ -73,6 +72,10 @@ namespace RepopulateData
                             LinePrice = productPrices[productId] * quantity
                         });
                     }
+
+                    order.OrderTotal = order.OrderItems.Sum(x => x.ItemPrice);
+                    var dayOfYear = random.Next(0, 364);
+                    order.OrderDate = new DateTime(2019, 1, 1).AddDays(dayOfYear);
 
                     orders.Add(order);
                 }

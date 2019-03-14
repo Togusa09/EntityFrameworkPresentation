@@ -18,6 +18,10 @@ namespace EntityFrameworkPresentation.DataContext
 
         public int CustomerId { get; set; }
 
+        public DateTime OrderDate { get; set; }
+
+        public decimal OrderTotal { get; set; }
+
         public virtual Customer Customer { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

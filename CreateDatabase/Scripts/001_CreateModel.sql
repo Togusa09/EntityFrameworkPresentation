@@ -8,7 +8,9 @@
 create table Orders
 (
 	Id int not null IDENTITY (1,1) PRIMARY KEY,
-	CustomerId int not null FOREIGN KEY REFERENCES Customers(Id)
+	CustomerId int not null FOREIGN KEY REFERENCES Customers(Id),
+	OrderDate DateTime2 not null,
+	OrderTotal decimal(12,4) not null
 );
 
 create table Products
